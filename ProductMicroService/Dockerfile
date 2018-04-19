@@ -3,12 +3,12 @@ WORKDIR /app
 EXPOSE 80
 
 FROM microsoft/aspnetcore-build:2.0 AS build
-WORKDIR /src
+WORKDIR /
 COPY *.sln ./
 COPY ProductMicroService/ProductMicroService.csproj ProductMicroService/
 RUN dotnet restore
 COPY . .
-WORKDIR /src/ProductMicroService
+WORKDIR /ProductMicroService
 RUN dotnet build -c Release -o /app
 
 FROM build AS publish
